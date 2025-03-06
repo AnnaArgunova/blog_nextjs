@@ -16,7 +16,6 @@ jobs:
       - run: npm run lint
   build:
     name: Build
-    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +23,7 @@ jobs:
       - run: npm run build
   deploy-production:
     name: Deploy (Production)
-    needs: build
+    needs: [lint, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
